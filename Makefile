@@ -26,8 +26,9 @@ cov-html:
 	--compilers coffee:coffee-script/register \
 	-R html-cov --bail test/ > cov.html
 
-# cov-html:
-# 	$(MOCHA_BIN) \
-# 	--require coffee-coverage/register \
-# 	--compilers coffee:coffee-script/register \
-# 	-R json-cov --bail test/ > coverage.json
+coverall:
+	YOURPACKAGE_COVERAGE=1 \
+	$(MOCHA_BIN) \
+	--require coffee-coverage/register \
+	--compilers coffee:coffee-script/register \
+	-R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
